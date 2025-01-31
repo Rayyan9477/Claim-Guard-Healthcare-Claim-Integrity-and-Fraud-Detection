@@ -1,0 +1,14 @@
+1. Normal case:
+   Amount: 1200.00
+   CPT: 99213
+   Expected: Approved
+
+2. High amount:
+   Amount: 3500.00
+   CPT: 99214
+   Expected: Denied (Amount exceeds threshold)
+
+3. Outside typical range:
+   Amount: 80.00
+   CPT: 99215
+   Expected: Denied (Amount outside typical range)

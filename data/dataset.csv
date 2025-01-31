@@ -1,0 +1,11 @@
+claim_id,claim_amount,cpt_code,claim_status
+1,1500.00,99213,approved
+2,2000.00,99214,denied
+3,500.00,99203,approved
+4,750.00,99213,denied
+5,1200.00,99214,approved
+6,300.00,99203,denied
+7,450.00,99213,approved
+8,800.00,99214,denied
+9,600.00,99203,approved
+10,1000.00,99214,denied
