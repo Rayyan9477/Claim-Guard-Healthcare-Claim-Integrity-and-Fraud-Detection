@@ -4,14 +4,10 @@ import joblib
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# Load the model
-current_dir = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(os.path.dirname(current_dir), 'models', 'model.pkl')
-model = joblib.load(model_path)
+from model_training import load_data, preprocess_training_data, train_model, save_model, train_and_save_model
 
 # Function to predict claim status
-def predict_claim_status(patient_age, gender, insurance_provider, service_date, billing_code, diagnosis_code, place_of_service, claim_amount, submitted_charges, allowed_amount, copay_amount, deductible_amount):
+def predict_claim_status(model, patient_age, gender, insurance_provider, service_date, billing_code, diagnosis_code, place_of_service, claim_amount, submitted_charges, allowed_amount, copay_amount, deductible_amount):
     # Create input data as a DataFrame
     input_data = pd.DataFrame({
         'patient_age': [patient_age],
@@ -38,6 +34,19 @@ def predict_claim_status(patient_age, gender, insurance_provider, service_date, 
 st.title("Claims Optimization System")
 st.write("Enter claim details to predict approval status")
 
+# File paths
+current_dir = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(os.path.dirname(current_dir), 'data', 'dataset.csv')
+model_path = os.path.join(os.path.dirname(current_dir), 'models', 'model.pkl')
+
+# Check if the model exists
+if not os.path.exists(model_path):
+    st.warning("Model not found. Training a new model...")
+    model = train_and_save_model(data_path, model_path)
+    st.success(f"Model saved to {model_path}")
+else:
+    model = joblib.load(model_path)
+
 # Input fields
 patient_age = st.number_input("Patient Age", value=50)
 gender = st.selectbox("Gender", ["Male", "Female"])
@@ -54,7 +63,7 @@ deductible_amount = st.number_input("Deductible Amount", value=50.00)
 
 # Prediction button
 if st.button("Predict Claim Status"):
-    prediction = predict_claim_status(patient_age, gender, insurance_provider, str(service_date), billing_code, diagnosis_code, place_of_service, claim_amount, submitted_charges, allowed_amount, copay_amount, deductible_amount)
+    prediction = predict_claim_status(model, patient_age, gender, insurance_provider, str(service_date), billing_code, diagnosis_code, place_of_service, claim_amount, submitted_charges, allowed_amount, copay_amount, deductible_amount)
     st.write(f"Prediction: {prediction}")
 
     # Add an explanation and recommendations based on the prediction
@@ -74,7 +83,7 @@ if show_eda:
     st.header("Exploratory Data Analysis")
 
     # Load the dataset
-    data = pd.read_csv(os.path.join(os.path.dirname(current_dir), 'data', 'dataset.csv'))
+    data = load_data(data_path)
 
     # Display claim amount distribution
     st.subheader("Claim Amount Distribution")

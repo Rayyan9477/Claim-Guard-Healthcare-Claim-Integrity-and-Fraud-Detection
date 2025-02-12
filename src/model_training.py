@@ -56,16 +56,9 @@ def load_model(model_path):
     model = joblib.load(model_path)
     return model
 
-def main():
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(os.path.dirname(current_dir), 'data', 'dataset.csv')
-    model_path = os.path.join(os.path.dirname(current_dir), 'models', 'model.pkl')
-
+def train_and_save_model(data_path, model_path):
     data = load_data(data_path)
     preprocessor, X, y = preprocess_training_data(data)
     model = train_model(preprocessor, X, y)
     save_model(model, model_path)
-    print(f"Model saved to {model_path}")
-
-if __name__ == "__main__":
-    main()
+    return model
