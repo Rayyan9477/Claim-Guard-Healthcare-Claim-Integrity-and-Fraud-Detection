@@ -32,7 +32,7 @@ def predict_claim_status(model, patient_age, gender, insurance_provider, service
 
 # Streamlit app
 st.title("Claims Optimization System")
-st.write("Enter claim details to predict approval status")
+st.write("Enter claim details to predict approval status.  Adjust the input values below to match the claim you want to evaluate.")
 
 # File paths
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +41,6 @@ model_path = os.path.join(os.path.dirname(current_dir), 'models', 'model.pkl')
 
 # Check if the model exists
 if not os.path.exists(model_path):
-    st.warning("Model not found. Training a new model...")
     model = train_and_save_model(data_path, model_path)
     st.success(f"Model saved to {model_path}")
 else:
@@ -69,7 +68,6 @@ if st.button("Predict Claim Status"):
     # Add an explanation and recommendations based on the prediction
     if prediction == "Denied":
         st.warning("This claim has a high risk of denial. Please review the following:")
-        st.write("- Verify the coding is accurate and complete.")
         st.write("- Ensure all necessary documentation is attached.")
         st.write("- Check for prior authorization requirements.")
     else:
@@ -77,7 +75,7 @@ if st.button("Predict Claim Status"):
 
 # --- Data Analysis and Visualizations ---
 st.sidebar.header("Data Analysis")
-show_eda = st.sidebar.checkbox("Show Exploratory Data Analysis")
+show_eda = st.sidebar.checkbox("Show Exploratory Data Analysis", value=True)  # Set default to True
 
 if show_eda:
     st.header("Exploratory Data Analysis")
