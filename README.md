@@ -1,6 +1,6 @@
 # ClaimGuard: Healthcare Claim Integrity and Fraud Detection
 
-## Description
+## Description:
 
 ClaimGuard is a smart system designed to help medical billing companies and hospitals ensure the integrity of their healthcare claims and prevent denials. Think of it as a sophisticated tool that analyzes claim data to predict whether an insurance company is likely to reject a claim *before* it's even submitted.
 
@@ -16,6 +16,14 @@ ClaimGuard is a smart system designed to help medical billing companies and hosp
 *   **Accelerates Payments:** Faster claim approvals mean quicker payments and improved cash flow.
 *   **Increases Revenue:** By minimizing denials and maximizing approvals, ClaimGuard helps boost revenue for healthcare providers.
 *   **Improves Efficiency:** Automates the error detection process, freeing up staff to focus on other important tasks.
+
+## Visuals
+![Claim Amount Distribution ](https://github.com/Rayyan9477/Claim-Guard-Healthcare-Claim-Integrity-and-Fraud-Detection/blob/main/Claim_amount%20distribution.png)
+
+![Denial Distribution](https://github.com/Rayyan9477/Claim-Guard-Healthcare-Claim-Integrity-and-Fraud-Detection/blob/main/Denial%20distribution.png)
+
+![Insurance Provider's ](https://github.com/Rayyan9477/Claim-Guard-Healthcare-Claim-Integrity-and-Fraud-Detection/blob/main/Insurance_providers.png)
+
 
 ## Project Structure
 
